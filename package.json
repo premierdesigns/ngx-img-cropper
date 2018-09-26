@@ -2,6 +2,8 @@
   "name": "ngx-img-cropper",
   "version": "0.10.4",
   "description": "Image cropping tool for Angular",
+  "main": "dist/index.js",
+  "types" : "dist/index.d.ts",
   "scripts": {
     "tsc": "tsc",
     "build": "npm run clean && ngc -p tsconfig-aot.json",
