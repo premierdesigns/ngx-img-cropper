@@ -26,7 +26,7 @@ export interface ICropperSettings {
   preserveSize?: boolean;
   compressRatio?: number;
   rounded?: boolean;
-  diamond: boolean;
+  diamond?: boolean;
   keepAspect?: boolean;
 }
 
