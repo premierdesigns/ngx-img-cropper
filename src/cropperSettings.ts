@@ -26,6 +26,7 @@ export interface ICropperSettings {
   preserveSize?: boolean;
   compressRatio?: number;
   rounded?: boolean;
+  diamond: boolean;
   keepAspect?: boolean;
 }
 
@@ -66,6 +67,7 @@ export class CropperSettings implements ICropperSettings {
   public compressRatio: number = 1.0;
 
   private _rounded: boolean = false;
+  private _diamond: boolean = false;
   private _keepAspect: boolean = true;
 
   constructor(settings?: ICropperSettings) {
@@ -76,6 +78,7 @@ export class CropperSettings implements ICropperSettings {
 
   set rounded(val: boolean) {
     this._rounded = val;
+    this._diamond = !val;
     if (val) {
       this._keepAspect = true;
     }
@@ -85,11 +88,22 @@ export class CropperSettings implements ICropperSettings {
     return this._rounded;
   }
 
+  set diamond(val: boolean) {
+      this._diamond = val;
+      this._rounded = !val;
+      if (val) {
+          this._keepAspect = true;
+      }
+  }
+  get diamond(): boolean {
+      return this._diamond;
+  }
+
   set keepAspect(val: boolean) {
     this._keepAspect = val;
-    if (this._rounded === true && this._keepAspect === false) {
+    if (this._keepAspect === false && (this._rounded || this._diamond)) {
       console.error(
-        "Cannot set keep aspect to false on rounded cropper. Ellipsis not supported"
+        "Cannot set keep aspect to false on rounded or diamond cropper. Ellipsis not supported"
       );
       this._keepAspect = true;
     }
