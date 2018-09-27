@@ -55,10 +55,12 @@ var ImageCropperComponent = (function () {
         if (changes.inputImage) {
             this.setImage(changes.inputImage.currentValue);
         }
-        if (changes.settings && this.cropper && this.cropper.isImageSet()) {
+        if (changes.settings && this.cropper) {
             this.cropper.updateSettings(this.settings);
-            this.image.image = this.cropper.getCroppedImageHelper().src;
-            this.onCrop.emit(this.cropper.getCropBounds());
+            if (this.cropper.isImageSet()) {
+                this.image.image = this.cropper.getCroppedImageHelper().src;
+                this.onCrop.emit(this.cropper.getCropBounds());
+            }
         }
     };
     ImageCropperComponent.prototype.ngOnDestroy = function () {

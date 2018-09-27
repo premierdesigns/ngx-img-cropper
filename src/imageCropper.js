@@ -36,21 +36,26 @@ var ImageCropper = (function (_super) {
         _this.crop = _this;
         _this.x = x;
         _this.y = y;
+        _this.canvasHeight = cropperSettings.canvasHeight;
+        _this.canvasWidth = cropperSettings.canvasWidth;
+        _this.width = width;
         if (width === void 0) {
             _this.width = 100;
         }
+        _this.height = height;
         if (height === void 0) {
             _this.height = 50;
         }
+        _this.keepAspect = keepAspect;
         if (keepAspect === void 0) {
             _this.keepAspect = true;
         }
+        _this.touchRadius = touchRadius;
         if (touchRadius === void 0) {
             _this.touchRadius = 20;
         }
         _this.minWidth = minWidth;
         _this.minHeight = minHeight;
-        _this.keepAspect = false;
         _this.aspectRatio = 0;
         _this.currentDragTouches = [];
         _this.isMouseDown = false;
@@ -73,7 +78,6 @@ var ImageCropper = (function (_super) {
         _this.br.addVerticalNeighbour(_this.tr);
         _this.markers = [_this.tl, _this.tr, _this.bl, _this.br];
         _this.center = new dragMarker_1.DragMarker(x + (width / 2), y + (height / 2), centerTouchRadius, _this.cropperSettings);
-        _this.keepAspect = keepAspect;
         _this.aspectRatio = height / width;
         _this.croppedImage = new Image();
         _this.currentlyInteracting = false;
@@ -200,7 +204,16 @@ var ImageCropper = (function (_super) {
             ctx.lineWidth = this.cropperSettings.cropperDrawSettings.strokeWidth;
             ctx.strokeStyle = this.cropperSettings.cropperDrawSettings.strokeColor;
             ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-            if (!this.cropperSettings.rounded) {
+            if (this.cropperSettings.diamond) {
+                ctx.beginPath();
+                ctx.moveTo(bounds.left + bounds.width / 2, bounds.top + 1);
+                ctx.lineTo(bounds.left + 1, bounds.top + bounds.height / 2);
+                ctx.lineTo(bounds.left + bounds.width / 2, bounds.top + bounds.height - 1);
+                ctx.lineTo(bounds.left + bounds.width - 1, bounds.top + bounds.height / 2);
+                ctx.lineTo(bounds.left + bounds.width / 2, bounds.top + 1);
+                ctx.stroke();
+            }
+            else if (!this.cropperSettings.rounded) {
                 ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
                 ctx.drawImage(this.buffer, bounds.left, bounds.top, Math.max(bounds.width, 1), Math.max(bounds.height, 1), bounds.left, bounds.top, bounds.width, bounds.height);
                 ctx.strokeRect(bounds.left, bounds.top, bounds.width, bounds.height);

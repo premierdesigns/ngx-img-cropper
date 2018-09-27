@@ -22,6 +22,7 @@ var CropperSettings = /** @class */ (function () {
         this.preserveSize = false;
         this.compressRatio = 1.0;
         this._rounded = false;
+        this._diamond = false;
         this._keepAspect = true;
         if (typeof settings === "object") {
             Object.assign(this, settings);
@@ -33,6 +34,21 @@ var CropperSettings = /** @class */ (function () {
         },
         set: function (val) {
             this._rounded = val;
+            this._diamond = !val;
+            if (val) {
+                this._keepAspect = true;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CropperSettings.prototype, "diamond", {
+        get: function () {
+            return this._diamond;
+        },
+        set: function (val) {
+            this._diamond = val;
+            this._rounded = !val;
             if (val) {
                 this._keepAspect = true;
             }
@@ -46,8 +62,8 @@ var CropperSettings = /** @class */ (function () {
         },
         set: function (val) {
             this._keepAspect = val;
-            if (this._rounded === true && this._keepAspect === false) {
-                console.error("Cannot set keep aspect to false on rounded cropper. Ellipsis not supported");
+            if (this._keepAspect === false && (this._rounded || this._diamond)) {
+                console.error("Cannot set keep aspect to false on rounded or diamond cropper. Ellipsis not supported");
                 this._keepAspect = true;
             }
         },

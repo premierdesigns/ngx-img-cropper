@@ -11,8 +11,6 @@ var ImageCropperModule = /** @class */ (function () {
                     exports: [ImageCropperComponent]
                 },] },
     ];
-    /** @nocollapse */
-    ImageCropperModule.ctorParameters = function () { return []; };
     return ImageCropperModule;
 }());
 export { ImageCropperModule };

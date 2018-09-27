@@ -31,10 +31,10 @@ export declare class ImageCropperComponent implements AfterViewInit, OnChanges, 
     onMouseUp(event: MouseEvent): void;
     onMouseMove(event: MouseEvent): void;
     fileChangeListener($event: any): void;
-    private resize();
+    private resize;
     reset(): void;
     setImage(image: HTMLImageElement, newBounds?: any): void;
-    private isCropPositionChanged(changes);
-    private updateCropBounds();
-    private getOrientedImage(image, callback);
+    private isCropPositionChanged;
+    private updateCropBounds;
+    private getOrientedImage;
 }

@@ -25,6 +25,7 @@ export interface ICropperSettings {
     preserveSize?: boolean;
     compressRatio?: number;
     rounded?: boolean;
+    diamond?: boolean;
     keepAspect?: boolean;
 }
 export declare class CropperSettings implements ICropperSettings {
@@ -53,8 +54,10 @@ export declare class CropperSettings implements ICropperSettings {
     preserveSize: boolean;
     compressRatio: number;
     private _rounded;
+    private _diamond;
     private _keepAspect;
     constructor(settings?: ICropperSettings);
     rounded: boolean;
+    diamond: boolean;
     keepAspect: boolean;
 }

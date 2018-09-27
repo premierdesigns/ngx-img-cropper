@@ -28,7 +28,7 @@ export declare class Exif {
     static readTagValue(file: any, entryOffset: number, tiffStart: number, dirStart: number, bigEnd: boolean): any;
     static getStringFromDB(buffer: DataView, start: number, length: number): string;
     static readEXIFData(file: DataView, start: number): any;
-    private static checkImageType(img);
+    private static checkImageType;
     static getData(img: IImageExtended | HTMLImageElement, callback: Function): boolean;
     static getTag(img: any, tag: string): any;
     static getAllTags(img: any): any;
